@@ -1,0 +1,106 @@
+﻿ ================================CricketDBContext ===========================================
+
+
+Enable-Migrations -ContextTypeName EshopContext -MigrationsDirectory Migrations\Product
+
+add-migration -ConfigurationTypeName E_ShopMVC.Migrations.Product.Configuration "InitialCreate"
+
+update-database -ConfigurationTypeName E_ShopMVC.Migrations.Product.Configuration
+
+
+use -Force to replace previous change
+
+
+
+MyDbContext
+Enable-Migrations -ContextTypeName MyDbContext -MigrationsDirectory Migrations
+add-migration -ConfigurationTypeName PcPick.Migrations.Configuration "InitialCreate"
+update-database -ConfigurationTypeName PcPick.Migrations.Configuration
+
+
+
+
+   ================================ApplicationDBContext ===========================================
+
+Enable-Migrations -ContextTypeName ApplicationDbContext -MigrationsDirectory Migrations\Identity
+
+add-migration -ConfigurationTypeName E_ShopMVC.Migrations.Identity.Configuration "InitialIdentity"
+
+update-database -ConfigurationTypeName E_ShopMVC.Migrations.Identity.Configuration
+
+
+   ================================ Seed ===========================================
+
+
+			context.Teams.AddOrUpdate(t=>t.Name, DummyData.getTeams().ToArray());
+			context.SaveChanges();
+			context.Players.AddOrUpdate(p=> new {p.FirstName, p.LastName}, 
+				DummyData.getPlayers(context).ToArray());
+
+
+
+   ================================ConnectionStrings ===========================================
+
+
+Default .................................................................................................................
+<connectionStrings>
+	<add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;
+	AttachDbFilename=|DataDirectory|\aspnet-BDCrickTeam-20190110095050.mdf;
+	Initial Catalog=aspnet-BDCrickTeam-20190110095050;Integrated Security=True" providerName="System.Data.SqlClient" />
+</connectionStrings>
+
+
+
+Changed connection Strings..................................................................................................
+
+<connectionStrings>
+  <add name="EShopContext" connectionString="data source=.;initial catalog=eShop;integrated security=True;
+  MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+
+
+  Help for EShopContext .....................................................................................................
+
+	public class EShopContext : DbContext
+	{
+		public EShopContext()
+			: base("name=EShopConnection")
+		{}
+
+		public virtual DbSet<LaptopCategory> LaptopCategoriesTable { get; set; }
+		public virtual DbSet<Laptop> LaptopsTable { get; set; }
+	}
+
+
+
+
+
+
+
+
+
+
+	To Doooooooooooooooooooooooooooooooo
+
+	1. Sorting of Products .. 
+	sortering Result
+
+
+
+	Product::
+
+	var model = new ProductIndexViewModel();
+			using (var db = new EShopContext())
+			{
+				model.CategoryName = string.Join(" ", db.CategoriesTable.Where(p => p.CategoryId == id).Select(p => p.CategoryName));
+
+				model.Products.AddRange(db.ProductsTable.Select(p => new ProductIndexViewModel.ProductListViewModel
+				{
+					ProductId = p.ProductId,
+					ProductName = p.ProductName,
+					ProductDetail = p.ProductDetail,
+					Price = p.ProductPrice,
+					CategoryId = p.CategoryId
+
+				}).Where(p => p.CategoryId == id));
+			}

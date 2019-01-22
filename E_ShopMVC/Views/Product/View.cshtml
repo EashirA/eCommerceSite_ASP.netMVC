@@ -1,0 +1,72 @@
+﻿@model E_ShopMVC.ViewModels.ProductIndexViewModel
+
+@{
+    ViewBag.Title = "View";
+}
+
+@if (Request.IsAuthenticated)
+{
+    @Html.ActionLink("Create", "Create", new { id = Model.CategoryId })
+}
+
+<h2 style="font-family: cursive; color: orange">@Html.DisplayFor(model => model.CategoryName)</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @if (Model.CurrentSort == "ProductNameAsc")
+            {
+                @Html.ActionLink("Product", "View", new { sort = "ProductNameDesc", searchString = Request.QueryString["searchString"] })
+            }
+            else
+            {
+                @Html.ActionLink("Product", "View", new { sort = "ProductNameAsc", searchString = Request.QueryString["searchString"] })
+            }
+
+        </th>
+        <th>
+            @if (Model.CurrentSort == "ProductPriceAsc")
+            {
+                @Html.ActionLink("Price", "View", new { sort = "ProductPriceDesc", searchString = Request.QueryString["searchString"] })
+            }
+            else
+            {
+                @Html.ActionLink("Price", "View", new { sort = "ProductPriceAsc", searchString = Request.QueryString["searchString"] })
+            }
+        </th>
+        <th>Product Detail</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var item in Model.Products)
+    {
+        <tr>
+            <td>
+                @item.ProductName
+            </td>
+            <td>
+                @item.Price
+            </td>
+            <td>
+                @item.ProductDetail
+            </td>
+
+            @if (Request.IsAuthenticated)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                </td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("View All Products", "Product", "Product", new { }, null)
+</p>
+
+

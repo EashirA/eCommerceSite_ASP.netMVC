@@ -1,0 +1,39 @@
+﻿@model  E_ShopMVC.ViewModels.EditCategoryViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <table class="table">
+        <tr>
+            <th><h2>Edit Category</h2></th>
+            <th></th>
+        </tr>
+
+        <tr>
+            <td>@Html.ActionLink("Category", "Index", new { }, null)</td>
+            <td>
+                @Html.HiddenFor(model => model.CategoryId)
+                @Html.TextBoxFor(model => model.CategoryName)
+                @Html.ValidationMessageFor(model => model.CategoryName)
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                @Html.TextBoxFor(p => p.Description)
+                @Html.ValidationMessageFor(p => p.Description)
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Save" />
+
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
