@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace E_ShopMVC.ViewModels
+namespace E_ShopMVC.ViewModels.Category
 {
     public class CategoryIndexViewModel
     {

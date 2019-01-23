@@ -1,4 +1,4 @@
-﻿@model  E_ShopMVC.ViewModels.EditCategoryViewModel
+﻿@model  E_ShopMVC.ViewModels.Category.EditCategoryViewModel
 @{
     ViewBag.Title = "Edit";
 }
@@ -24,7 +24,7 @@
         <tr>
             <td>Description</td>
             <td>
-                @Html.TextBoxFor(p => p.Description)
+                @Html.TextAreaFor(p => p.Description)
                 @Html.ValidationMessageFor(p => p.Description)
             </td>
         </tr>

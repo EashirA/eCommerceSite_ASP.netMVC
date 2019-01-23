@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace E_ShopMVC.ViewModels
+namespace E_ShopMVC.ViewModels.Category
 {
     public class CreateCategoryViewModel
     {
-        [Key]
         public int CategoryId { get; set; }
 
         [Required(ErrorMessage = "This Value Required")]

@@ -37,7 +37,26 @@ namespace E_ShopMVC
                     userManager.AddToRole(user.Id, "Admin");
 
             }
-            if (!roleManager.RoleExists("ProductManager"))
+
+            if (!roleManager.RoleExists("Admin"))
+            {
+                var role = new IdentityRole { Name = "Admin" };
+                roleManager.Create(role);
+
+                var user = new ApplicationUser
+                {
+                    UserName = "eas_dhk@hotmail.com",
+                    Email = "eas_dhk@hotmail.com"
+                };
+                var userPassword = "Asp.netMVC";
+                var chkUser = userManager.Create(user, userPassword);
+
+                if (chkUser.Succeeded)
+                    userManager.AddToRole(user.Id, "Admin");
+
+            }
+
+            if (!roleManager.RoleExists("Manager"))
             {
                 var role = new IdentityRole { Name = "ProductManager" };
                 roleManager.Create(role);

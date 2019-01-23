@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace E_ShopMVC.ViewModels
+namespace E_ShopMVC.ViewModels.User
 {
     public class UserViewModel
     {
@@ -14,19 +14,13 @@ namespace E_ShopMVC.ViewModels
             public string UserId { get; set; }
             public string UserRoles { get; set; }
             public string Email { get; set; }
-            public string UserName { get; set; }
             public string Password { get; set; }
             public string ConfirmPassword { get; set; }
+            public string UserName { get; set; }
+
         }
-
-
-        public string UserId { get; set; }
-        public string UserRoles { get; set; }
-        public string Email { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
-
         public List<UserListViewModel> Users { get; set; }
     }
+
+   
 }

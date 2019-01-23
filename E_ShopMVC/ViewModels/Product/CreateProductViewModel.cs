@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace E_ShopMVC.ViewModels
+namespace E_ShopMVC.ViewModels.Product
 {
-    public class EditProductViewModel
+    public class CreateProductViewModel
     {
-        [Key]
+        
         [Required]
         public int ProductId { get; set; }
         [Required(ErrorMessage = "This Value Required")]

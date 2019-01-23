@@ -12,14 +12,6 @@ use -Force to replace previous change
 
 
 
-MyDbContext
-Enable-Migrations -ContextTypeName MyDbContext -MigrationsDirectory Migrations
-add-migration -ConfigurationTypeName PcPick.Migrations.Configuration "InitialCreate"
-update-database -ConfigurationTypeName PcPick.Migrations.Configuration
-
-
-
-
    ================================ApplicationDBContext ===========================================
 
 Enable-Migrations -ContextTypeName ApplicationDbContext -MigrationsDirectory Migrations\Identity
@@ -27,16 +19,6 @@ Enable-Migrations -ContextTypeName ApplicationDbContext -MigrationsDirectory Mig
 add-migration -ConfigurationTypeName E_ShopMVC.Migrations.Identity.Configuration "InitialIdentity"
 
 update-database -ConfigurationTypeName E_ShopMVC.Migrations.Identity.Configuration
-
-
-   ================================ Seed ===========================================
-
-
-			context.Teams.AddOrUpdate(t=>t.Name, DummyData.getTeams().ToArray());
-			context.SaveChanges();
-			context.Players.AddOrUpdate(p=> new {p.FirstName, p.LastName}, 
-				DummyData.getPlayers(context).ToArray());
-
 
 
    ================================ConnectionStrings ===========================================
@@ -72,35 +54,3 @@ Changed connection Strings......................................................
 	}
 
 
-
-
-
-
-
-
-
-
-	To Doooooooooooooooooooooooooooooooo
-
-	1. Sorting of Products .. 
-	sortering Result
-
-
-
-	Product::
-
-	var model = new ProductIndexViewModel();
-			using (var db = new EShopContext())
-			{
-				model.CategoryName = string.Join(" ", db.CategoriesTable.Where(p => p.CategoryId == id).Select(p => p.CategoryName));
-
-				model.Products.AddRange(db.ProductsTable.Select(p => new ProductIndexViewModel.ProductListViewModel
-				{
-					ProductId = p.ProductId,
-					ProductName = p.ProductName,
-					ProductDetail = p.ProductDetail,
-					Price = p.ProductPrice,
-					CategoryId = p.CategoryId
-
-				}).Where(p => p.CategoryId == id));
-			}

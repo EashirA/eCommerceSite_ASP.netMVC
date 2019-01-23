@@ -1,10 +1,10 @@
-﻿@model E_ShopMVC.ViewModels.ViewAProductViewModel
+﻿@model E_ShopMVC.ViewModels.Product.ProductIndexViewModel.ProductListViewModel
 
 @{
     ViewBag.Title = "ViewAProduct";
 }
 
-<h2>@Model.ProductName</h2>
+<h2 style="font-family: cursive; color: yellowgreen" >@Model.ProductName</h2>
 
 <div>
     <table class="table">
@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td>Category Name</td>
-            <td>@Model.Category</td>
+            <td>@Model.CategoryName</td>
         </tr>
         <tr>
             <td>Description</td>
@@ -33,5 +33,4 @@
         @Html.ActionLink("Back To Products", "Product", new { })
     </p>
 </div>
-
 

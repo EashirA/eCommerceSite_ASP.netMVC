@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using E_ShopMVC.Data;
 using E_ShopMVC.Models;
+using E_ShopMVC.ViewModels.Category;
 
 namespace E_ShopMVC.Controllers
 {
@@ -25,25 +26,6 @@ namespace E_ShopMVC.Controllers
             }
             return View(model);
         }
-
-        //public ActionResult View(int id)
-        //{
-        //    using (var db = new EShopContext())
-        //    {
-        //        var category = db.CategoriesTable.FirstOrDefault(x => x.CategoryId == id);
-
-        //        var model = new ViewCategoryViewModel
-        //        {
-        //            CategoryId = category.CategoryId,
-        //            CategoryName = category.CategoryName,
-        //            Description = category.CategoryDescription
-
-        //        };
-        //        return View(model);
-        //    }
-        //}
-
-
 
         [HttpGet]
         [Authorize]
@@ -127,9 +109,6 @@ namespace E_ShopMVC.Controllers
         }
 
 
-
-
-
         [HttpGet]
         [Authorize]
         public ActionResult Delete(int id)
@@ -145,16 +124,4 @@ namespace E_ShopMVC.Controllers
             return RedirectToAction("Index");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

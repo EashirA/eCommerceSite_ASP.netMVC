@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
-namespace E_ShopMVC.ViewModels
+namespace E_ShopMVC.ViewModels.Product
 {
-    public class CreateProductViewModel
+    public class EditProductViewModel
     {
-        [Key]
+
         [Required]
         public int ProductId { get; set; }
         [Required(ErrorMessage = "This Value Required")]
@@ -14,5 +16,9 @@ namespace E_ShopMVC.ViewModels
         public string ProductDetail { get; set; }
         [Required]
         public decimal ProductPrice { get; set; }
+
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public List<SelectListItem> CategoryDropDownList { get; set; }
     }
 }

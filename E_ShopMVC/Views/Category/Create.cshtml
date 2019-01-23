@@ -1,4 +1,4 @@
-﻿@model  E_ShopMVC.ViewModels.CreateCategoryViewModel
+﻿@model  E_ShopMVC.ViewModels.Category.CreateCategoryViewModel
 @{
     ViewBag.Title = "Create";
 }
@@ -8,11 +8,13 @@
     @Html.AntiForgeryToken()
     <table class="table">
         <tr>
-            <th><h2>Create New</h2></th>
+            <th>
+                <h2>Create New</h2>
+            </th>
             <th></th>
         </tr>
         <tr>
-            <td>@Html.ActionLink("Category", "Index", new { }, null)</td>
+            <td>@Html.ActionLink("Category", "Index", new {}, null)</td>
             <td>
 
                 @Html.TextBoxFor(model => model.CategoryName)
@@ -22,13 +24,12 @@
         <tr>
             <td>Description</td>
             <td>
-                @Html.TextBoxFor(p => p.Description)
+                @Html.TextAreaFor(p => p.Description)
                 @Html.ValidationMessageFor(p => p.Description)
             </td>
         </tr>
     </table>
-    <input type="submit" value="Save" />
-
+    <input type="submit" value="Save"/>
 }
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")

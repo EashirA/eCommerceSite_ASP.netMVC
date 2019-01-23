@@ -1,6 +1,7 @@
 ﻿using E_ShopMVC.Data;
 using E_ShopMVC.Models;
-using E_ShopMVC.ViewModels;
+using E_ShopMVC.ViewModels.Product;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -59,7 +60,7 @@ namespace E_ShopMVC.Controllers
                 return View(model);
             }
         }
-        
+
         public ActionResult View(int id, string sort)
         {
             var model = new ProductIndexViewModel();
@@ -107,13 +108,13 @@ namespace E_ShopMVC.Controllers
             using (var db = new EShopContext())
             {
                 var c = db.ProductsTable.FirstOrDefault(p => p.CategoryId == id);
-                var model = new ViewAProductViewModel
+                var model = new ProductIndexViewModel.ProductListViewModel
                 {
-                    ProductId = c.ProductId, // Having Problem here with last products ID .. showing as null
+                    ProductId = c.ProductId,
                     ProductName = c.ProductName,
                     ProductDetail = c.ProductDetail,
                     Price = c.ProductPrice,
-                    Category = c.Category.CategoryName
+                    CategoryName = c.Category.CategoryName
                 };
                 return View(model);
             }
@@ -125,23 +126,41 @@ namespace E_ShopMVC.Controllers
         [Authorize(Roles = "Admin,ProductManager")]
         public ActionResult Edit(int? id)
         {
-            if (id == null) return RedirectToAction("Edit");
             using (var db = new EShopContext())
             {
-                var product = db.ProductsTable.FirstOrDefault(p => p.ProductId == id);
+                var product = db.ProductsTable.Find(id);
                 var model = new EditProductViewModel
                 {
                     ProductId = product.ProductId,
                     ProductName = product.ProductName,
                     ProductDetail = product.ProductDetail,
-                    ProductPrice = product.ProductPrice
+                    ProductPrice = product.ProductPrice,
+                    CategoryId = product.CategoryId
                 };
+                DropDownCategories(model);
                 return View(model);
             }
         }
 
+        public void DropDownCategories(EditProductViewModel model)
+        {
+            model.CategoryDropDownList = new List<SelectListItem>();
+            using (var db = new EShopContext())
+            {
+                foreach (var c in db.CategoriesTable)
+                {
+                    model.CategoryDropDownList.Add(new SelectListItem
+                    {
+                        Value = c.CategoryId.ToString(),
+                        Text = c.CategoryName
+
+                    });
+                }
+            }
+        }
+
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin,ProductManager")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditProductViewModel model)
         {
@@ -156,24 +175,32 @@ namespace E_ShopMVC.Controllers
                 product.ProductName = model.ProductName;
                 product.ProductDetail = model.ProductDetail;
                 product.ProductPrice = model.ProductPrice;
+                product.CategoryId = model.CategoryId;
 
                 db.SaveChanges();
+                return RedirectToAction("Product", new { id = model.CategoryId });
             }
-            return RedirectToAction("Product");
         }
 
+
+
         [HttpGet]
-        [Authorize]
-        public ActionResult Create()
+        [Authorize(Roles = "Admin,ProductManager")]
+        public ActionResult Create(int id)
         {
-            var model = new CreateProductViewModel();
+            var model = new EditProductViewModel { CategoryId = id };
+            using (var db = new EShopContext())
+            {
+                model.CategoryName = string.Join("", db.CategoriesTable.Where(x => x.CategoryId == id).Select(x => x.CategoryName));
+                model.CategoryId = id;
+            }
             return View(model);
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin,ProductManager")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateProductViewModel model)
+        public ActionResult Create(EditProductViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -187,7 +214,8 @@ namespace E_ShopMVC.Controllers
                     ProductId = model.ProductId,
                     ProductName = model.ProductName,
                     ProductDetail = model.ProductDetail,
-                    ProductPrice = model.ProductPrice
+                    ProductPrice = model.ProductPrice,
+                    CategoryId = model.CategoryId,
                 };
                 db.ProductsTable.Add(product);
                 db.SaveChanges();
@@ -196,7 +224,7 @@ namespace E_ShopMVC.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin,ProductManager")]
         public ActionResult Delete(int id)
         {
             using (var db = new EShopContext())
@@ -209,25 +237,6 @@ namespace E_ShopMVC.Controllers
             }
             return RedirectToAction("Product");
         }
-
-
-
-        // This can be use as sorted category products
-        //var model = new ProductIndexViewModel();
-        //using (var db = new EShopContext())
-        //{
-        //    model.CategoryName = string.Join(" ", db.CategoriesTable.Where(p => p.CategoryId == id).Select(p => p.CategoryName));
-
-        //    model.Products.AddRange(db.ProductsTable.Select(p => new ProductIndexViewModel.ProductListViewModel
-        //    {
-        //        ProductId = p.ProductId,
-        //        ProductName = p.ProductName,
-        //        ProductDetail = p.ProductDetail,
-        //        Price = p.ProductPrice,
-        //        CategoryId = p.CategoryId
-
-        //    }).Where(p => p.CategoryId == id));
-        //}
     }
 
 }
