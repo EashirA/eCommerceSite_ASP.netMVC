@@ -7,13 +7,13 @@ namespace E_ShopMVC.Migrations.Identity
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialIdentity1 : IMigrationMetadata
+    public sealed partial class InitialIdentity : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialIdentity1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialIdentity));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901230325567_InitialIdentity1"; }
+            get { return "201901231354438_InitialIdentity"; }
         }
         
         string IMigrationMetadata.Source

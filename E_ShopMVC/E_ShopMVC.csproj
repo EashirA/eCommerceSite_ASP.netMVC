@@ -184,18 +184,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Identity\201901230213574_InitialIdentity.cs" />
-    <Compile Include="Migrations\Identity\201901230213574_InitialIdentity.Designer.cs">
-      <DependentUpon>201901230213574_InitialIdentity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Identity\201901230325567_InitialIdentity1.cs" />
-    <Compile Include="Migrations\Identity\201901230325567_InitialIdentity1.Designer.cs">
-      <DependentUpon>201901230325567_InitialIdentity1.cs</DependentUpon>
+    <Compile Include="Migrations\Identity\201901231354438_InitialIdentity.cs" />
+    <Compile Include="Migrations\Identity\201901231354438_InitialIdentity.Designer.cs">
+      <DependentUpon>201901231354438_InitialIdentity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Identity\Configuration.cs" />
-    <Compile Include="Migrations\Products\201901230217353_InitialCreate.cs" />
-    <Compile Include="Migrations\Products\201901230217353_InitialCreate.Designer.cs">
-      <DependentUpon>201901230217353_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\Products\201901231353486_InitialCreate.cs" />
+    <Compile Include="Migrations\Products\201901231353486_InitialCreate.Designer.cs">
+      <DependentUpon>201901231353486_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Products\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -303,14 +299,11 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\Identity\201901230213574_InitialIdentity.resx">
-      <DependentUpon>201901230213574_InitialIdentity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\Identity\201901231354438_InitialIdentity.resx">
+      <DependentUpon>201901231354438_InitialIdentity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\Identity\201901230325567_InitialIdentity1.resx">
-      <DependentUpon>201901230325567_InitialIdentity1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\Products\201901230217353_InitialCreate.resx">
-      <DependentUpon>201901230217353_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\Products\201901231353486_InitialCreate.resx">
+      <DependentUpon>201901231353486_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

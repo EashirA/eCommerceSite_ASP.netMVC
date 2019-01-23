@@ -37,7 +37,7 @@
     @foreach (var item in Model.Products)
     {
         <tr>
-            <td>@item.ProductName</td>
+            <td>@Html.ActionLink(item.ProductName, "ViewAProduct", "Product", new { id = item.ProductId }, null)</td>
             <td>@item.Price</td>
             <td>@Html.ActionLink(item.CategoryName, "View", "Product", new { id = item.CategoryId }, null)</td>
             @if (Request.IsAuthenticated)

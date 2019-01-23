@@ -103,19 +103,15 @@ namespace E_ShopMVC.Controllers
 
         public ActionResult ViewAProduct(int? id)
         {
-            if (id == null) return RedirectToAction("Product");
-
+            var model = new ProductIndexViewModel.ProductListViewModel();
             using (var db = new EShopContext())
             {
-                var c = db.ProductsTable.FirstOrDefault(p => p.CategoryId == id);
-                var model = new ProductIndexViewModel.ProductListViewModel
-                {
-                    ProductId = c.ProductId,
-                    ProductName = c.ProductName,
-                    ProductDetail = c.ProductDetail,
-                    Price = c.ProductPrice,
-                    CategoryName = c.Category.CategoryName
-                };
+                var c = db.ProductsTable.Find(id);
+                model.ProductId = c.ProductId;
+                model.ProductName = c.ProductName;
+                model.ProductDetail = c.ProductDetail;
+                model.Price = c.ProductPrice;
+                model.CategoryName = c.Category.CategoryName;
                 return View(model);
             }
         }

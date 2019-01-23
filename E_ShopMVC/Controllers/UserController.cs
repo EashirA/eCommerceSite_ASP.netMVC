@@ -88,8 +88,9 @@ namespace E_ShopMVC.Controllers
             {
                 var user = UserManager.FindById(model.UserId);
                 user.Id = model.UserId;
-
-                UserManager.RemoveFromRole(user.Id, model.UserRoles);  // Exception showing
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+                UserManager.RemoveFromRole(user.Id, model.UserRoles); 
                 UserManager.AddToRole(user.Id, model.DropDown);
 
                 db.SaveChanges();
